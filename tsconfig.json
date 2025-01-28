@@ -1,0 +1,19 @@
+{
+  "include": [
+    "lib"
+  ],
+  "compilerOptions": {
+    "target": "esNext",
+    "module": "commonjs",
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": false,
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "types": [
+      "@types/jasmine",
+      "@types/node"
+    ],
+  }
+}

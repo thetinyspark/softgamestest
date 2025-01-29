@@ -63,4 +63,8 @@ export default class FireScreen {
   update(delta) {
     this._flame.time += 0.1 * delta;
   }
+
+  resize(width:number, height:number){
+    
+  }
 }

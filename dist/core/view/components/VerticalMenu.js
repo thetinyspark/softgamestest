@@ -64,5 +64,9 @@ class VerticalMenu extends pixi_js_1.Container {
         else
             this.emit(app_const_1.default.GO_TO_FIRE_SCREEN);
     }
+    resize(width, height) {
+        this.x = width - this.getWidth();
+        this.y = 10;
+    }
 }
 exports.default = VerticalMenu;

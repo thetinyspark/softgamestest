@@ -15,4 +15,5 @@ export default class FireScreen {
     destroy(): void;
     reset(): void;
     update(delta: any): void;
+    resize(width: number, height: number): void;
 }

@@ -4,7 +4,6 @@ const pixi_js_1 = require("pixi.js");
 class Card extends pixi_js_1.Container {
     constructor(text = "", fontSize = 12, textColor = 0x000000, backgroundColor = 0xFFFFFF, width = 100, height = 60) {
         super();
-        this.updated = false;
         this._background = new pixi_js_1.Graphics();
         this._text = new pixi_js_1.Text(text, {
             fontFamily: "Arial",
@@ -44,12 +43,6 @@ class Card extends pixi_js_1.Container {
         this._border.endFill();
         this._text.x = (newWidth - this._text.width) / 2;
         this._text.y = (newHeight - this._text.height) / 2;
-    }
-    updateDepth() {
-        this.updated = true;
-        const parent = this.parent;
-        parent.removeChild(this);
-        parent.addChild(this);
     }
 }
 exports.default = Card;

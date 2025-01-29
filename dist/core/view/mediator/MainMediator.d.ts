@@ -8,4 +8,5 @@ export default class MainMediator extends Mediator {
     constructor();
     init(): void;
     private _clearScreens;
+    private _onResize;
 }

@@ -10,6 +10,7 @@ export default class DialogScreen {
     private _dialogs;
     private _dialogIndex;
     private _timeout;
+    private _messages;
     constructor(_service: CharacterAndDialogService, _repository: IRepository<PixiTextureData>);
     getContainer(): Container;
     reset(): void;
@@ -17,4 +18,5 @@ export default class DialogScreen {
     addDialogContainer(): void;
     destroy(): void;
     showNextMessage(): void;
+    resize(width: number, height: number): void;
 }

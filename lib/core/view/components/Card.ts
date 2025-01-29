@@ -5,7 +5,6 @@ export default class Card extends Container {
   private _text: Text;
   private _background: Graphics;
   private _border: Graphics;
-  public updated:boolean = false;
 
   constructor(
         text:string="", 
@@ -68,10 +67,4 @@ export default class Card extends Container {
     this._text.y = (newHeight - this._text.height) / 2;
   }
 
-  updateDepth(){
-    this.updated = true;
-    const parent = this.parent;
-    parent.removeChild(this); 
-    parent.addChild(this);
-  }
 }

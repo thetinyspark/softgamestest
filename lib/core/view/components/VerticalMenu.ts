@@ -85,4 +85,9 @@ export default class VerticalMenu extends Container {
     else
         this.emit(AppConst.GO_TO_FIRE_SCREEN);
   }
+
+  resize(width:number, height:number){
+    this.x = width - this.getWidth();
+    this.y = 10;
+  }
 }

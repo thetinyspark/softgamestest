@@ -41,23 +41,23 @@ export default class MainMediator extends Mediator{
 
         this._menu.on(AppConst.GO_TO_FIRE_SCREEN, ()=>{
             this._clearScreens();
-            this._fireScreen.destroy();
             this._fireScreen.reset();
             this._application.stage.addChildAt(this._fireScreen.getContainer(),0); 
+            this._onResize();
         });
 
         this._menu.on(AppConst.GO_TO_DIALOG_SCREEN, ()=>{
             this._clearScreens();
-            this._dialogScreen.destroy();
             this._dialogScreen.reset();
             this._application.stage.addChildAt(this._dialogScreen.getContainer(),0); 
+            this._onResize();
         });
 
         this._menu.on(AppConst.GO_TO_CARDS_SCREEN, ()=>{
             this._clearScreens();
-            this._cardsScreen.destroy();
             this._cardsScreen.reset();
             this._application.stage.addChildAt(this._cardsScreen.getContainer(),0); 
+            this._onResize();
         });
 
         // init screens
@@ -65,12 +65,26 @@ export default class MainMediator extends Mediator{
         this._dialogScreen = new DialogScreen(dialogService,repo);
         this._fireScreen = new FireScreen(repo, this._application);
     
+        // init resize listener
+        window.addEventListener("resize", ()=>this._onResize());
     }
 
     private _clearScreens(){
         this._application.stage.removeChild(this._cardsScreen.getContainer());
         this._application.stage.removeChild(this._dialogScreen.getContainer());
         this._application.stage.removeChild(this._fireScreen.getContainer());
+        this._fireScreen.destroy();
+        this._dialogScreen.destroy();
+        this._cardsScreen.destroy();
+    }
+
+    private _onResize(){
+        this._application.renderer.resize(window.innerWidth, window.innerHeight);
+        
+        this._menu.resize(window.innerWidth, window.innerHeight);
+        this._fireScreen.resize(window.innerWidth, window.innerHeight);
+        this._dialogScreen.resize(window.innerWidth, window.innerHeight);
+        this._cardsScreen.resize(window.innerWidth, window.innerHeight);
     }
 }
 

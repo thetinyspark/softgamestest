@@ -7,4 +7,5 @@ export default class VerticalMenu extends Container {
     getWidth(): number;
     _createMenuItem(option: string, index: number, menuWidth: number, fontSize: number, padding: number): void;
     _clickHandler(index: number): void;
+    resize(width: number, height: number): void;
 }

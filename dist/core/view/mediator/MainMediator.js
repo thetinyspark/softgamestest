@@ -28,31 +28,43 @@ class MainMediator extends coffe_maker_1.Mediator {
         this._application.stage.addChild(this._menu);
         this._menu.on(app_const_1.default.GO_TO_FIRE_SCREEN, () => {
             this._clearScreens();
-            this._fireScreen.destroy();
             this._fireScreen.reset();
             this._application.stage.addChildAt(this._fireScreen.getContainer(), 0);
+            this._onResize();
         });
         this._menu.on(app_const_1.default.GO_TO_DIALOG_SCREEN, () => {
             this._clearScreens();
-            this._dialogScreen.destroy();
             this._dialogScreen.reset();
             this._application.stage.addChildAt(this._dialogScreen.getContainer(), 0);
+            this._onResize();
         });
         this._menu.on(app_const_1.default.GO_TO_CARDS_SCREEN, () => {
             this._clearScreens();
-            this._cardsScreen.destroy();
             this._cardsScreen.reset();
             this._application.stage.addChildAt(this._cardsScreen.getContainer(), 0);
+            this._onResize();
         });
         // init screens
         this._cardsScreen = new CardsScreen_1.default(repo);
         this._dialogScreen = new DialogScreen_1.default(dialogService, repo);
         this._fireScreen = new FireScreen_1.default(repo, this._application);
+        // init resize listener
+        window.addEventListener("resize", () => this._onResize());
     }
     _clearScreens() {
         this._application.stage.removeChild(this._cardsScreen.getContainer());
         this._application.stage.removeChild(this._dialogScreen.getContainer());
         this._application.stage.removeChild(this._fireScreen.getContainer());
+        this._fireScreen.destroy();
+        this._dialogScreen.destroy();
+        this._cardsScreen.destroy();
+    }
+    _onResize() {
+        this._application.renderer.resize(window.innerWidth, window.innerHeight);
+        this._menu.resize(window.innerWidth, window.innerHeight);
+        this._fireScreen.resize(window.innerWidth, window.innerHeight);
+        this._dialogScreen.resize(window.innerWidth, window.innerHeight);
+        this._cardsScreen.resize(window.innerWidth, window.innerHeight);
     }
 }
 exports.default = MainMediator;

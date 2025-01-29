@@ -8,7 +8,7 @@ export default class CardsScreen {
     private _timeout;
     private _cardIndex;
     private _cards;
-    private _deckPositions;
+    private _decks;
     constructor(_repository: IRepository<PixiTextureData>);
     getContainer(): Container;
     destroy(): void;
@@ -16,4 +16,5 @@ export default class CardsScreen {
     addCardContainer(): void;
     reset(): void;
     moveNextCard(): void;
+    resize(width: number, height: number): void;
 }

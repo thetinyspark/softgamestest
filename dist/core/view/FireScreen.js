@@ -1,57 +1,49 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 const pixi_js_1 = require("pixi.js");
+const FlameFilter_1 = require("./FlameFilter");
 class FireScreen {
-    constructor(_repository) {
+    constructor(_repository, _app) {
         this._repository = _repository;
-        this._flames = [];
+        this._app = _app;
         this._container = new pixi_js_1.Container();
-        console.log(this._repository);
-    }
-    update() {
-        // Animer les flammes pour créer l'effet de feu
-        this._flames.forEach(flame => {
-            // Mouvement des flammes
-            flame.y -= Math.random() * 0.5; // Flamme monte lentement
-            flame.x += Math.random() * 0.3 - 0.15; // Déplacement horizontal aléatoire
-            // Rotation aléatoire pour un effet réaliste
-            flame.rotation += Math.random() * 0.02 - 0.01;
-            // Modification de l'opacité pour simuler le scintillement du feu
-            flame.alpha = Math.random() * 0.5 + 0.5; // Opacité change légèrement à chaque frame
-            // Réinitialiser la flamme lorsqu'elle dépasse un certain point pour la rendre "infinie"
-            if (flame.y < -100) {
-                flame.y = Math.random() * 50 + 100; // Réinitialise la position de la flamme
-                flame.x = Math.random() * 200 - 100; // Position aléatoire
-            }
-        });
+        this._flameContainer = new pixi_js_1.Container();
+        const texURI = this._repository.getOneBy("key", "noise").uri;
+        const texture = pixi_js_1.Texture.from(texURI);
+        this._chemneyTexture = pixi_js_1.Texture.from(this._repository.getOneBy("key", "chemney").uri);
+        this._texture = texture;
     }
     getContainer() {
         return this._container;
     }
     destroy() {
+        this._container.removeChildren();
         clearInterval(this._timeout);
     }
     reset() {
         this._container.removeChildren();
-        console.log(this._repository);
-        // Créer une texture de flamme (à remplacer par une texture réelle)
-        const flameTexture = pixi_js_1.Texture.from(this._repository.getOneBy("key", "fire").uri); // Texture de flamme, doit être ajoutée dans ton projet
-        // Créer 10 sprites représentant des flammes
-        for (let i = 0; i < 10; i++) {
-            const flame = new pixi_js_1.Sprite(flameTexture);
-            this._flames.push(flame);
-            this._container.addChild(flame);
-            // Positionner les flammes de façon aléatoire pour un effet plus naturel
-            flame.x = Math.random() * 200 - 100 + 200; // Placer dans un rayon autour du centre
-            flame.y = 300 - Math.random() * 50;
-            flame.alpha = Math.random() * 0.5 + 0.5; // Alpha aléatoire pour la transparence
-            flame.rotation = Math.random() * Math.PI; // Rotation aléatoire de départ
+        // add background
+        const tex = this._chemneyTexture;
+        const chemney = new pixi_js_1.Sprite(tex);
+        chemney.x = (window.innerWidth - tex.baseTexture.width) / 2;
+        // board.scale.set(3,3);
+        this._container.addChild(chemney);
+        this._container.addChild(this._flameContainer);
+        if (window.devicePixelRatio > 1) {
+            pixi_js_1.settings.RESOLUTION = 2;
         }
-        // Mettre à jour les flammes à chaque frame
-        this.update = this.update.bind(this);
+        const area = this._app.screen.clone();
+        area.y = window.innerHeight / 2;
+        area.height = window.innerHeight / 2;
+        this._flame = new FlameFilter_1.default(this._texture);
+        this._flameContainer.filterArea = area;
+        this._flameContainer.filters = [this._flame];
         this._timeout = setInterval(() => {
-            this.update();
-        }, 15);
+            this.update(16);
+        }, 16);
+    }
+    update(delta) {
+        this._flame.time += 0.1 * delta;
     }
 }
 exports.default = FireScreen;

@@ -41,18 +41,21 @@ export default class MainMediator extends Mediator{
 
         this._menu.on(AppConst.GO_TO_FIRE_SCREEN, ()=>{
             this._clearScreens();
+            this._fireScreen.destroy();
             this._fireScreen.reset();
             this._application.stage.addChildAt(this._fireScreen.getContainer(),0); 
         });
 
         this._menu.on(AppConst.GO_TO_DIALOG_SCREEN, ()=>{
             this._clearScreens();
+            this._dialogScreen.destroy();
             this._dialogScreen.reset();
             this._application.stage.addChildAt(this._dialogScreen.getContainer(),0); 
         });
 
         this._menu.on(AppConst.GO_TO_CARDS_SCREEN, ()=>{
             this._clearScreens();
+            this._cardsScreen.destroy();
             this._cardsScreen.reset();
             this._application.stage.addChildAt(this._cardsScreen.getContainer(),0); 
         });
@@ -60,7 +63,7 @@ export default class MainMediator extends Mediator{
         // init screens
         this._cardsScreen = new CardsScreen(repo);
         this._dialogScreen = new DialogScreen(dialogService,repo);
-        this._fireScreen = new FireScreen(repo);
+        this._fireScreen = new FireScreen(repo, this._application);
     
     }
 

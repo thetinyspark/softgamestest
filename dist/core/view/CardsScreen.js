@@ -25,7 +25,6 @@ class CardsScreen {
         // add board
         const tex = pixi_js_1.Texture.from(this._repository.getOneBy("key", "board").uri);
         const board = new pixi_js_1.Sprite(tex);
-        board.scale.set(3, 3);
         this._container.addChild(board);
     }
     addCardContainer() {
@@ -39,7 +38,7 @@ class CardsScreen {
         const cardWidth = 60;
         const cardHeight = 100;
         const texts = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
-        const posX = window.innerWidth / 2;
+        const posX = 120;
         const posY = window.innerHeight - 100;
         this._cards = [];
         this._deckPositions = [];

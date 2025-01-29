@@ -34,7 +34,6 @@ export default class CardsScreen {
     // add board
     const tex = Texture.from(this._repository.getOneBy("key","board").uri);
     const board = new Sprite(tex);
-    board.scale.set(3,3);
     this._container.addChild(board);
   }
 
@@ -51,7 +50,7 @@ export default class CardsScreen {
     const cardWidth = 60;
     const cardHeight = 100;
     const texts = ["1","2","3","4","5","6","7","8","9","10","J","Q","K","A"];
-    const posX = window.innerWidth / 2;
+    const posX = 120;
     const posY = window.innerHeight - 100;
 
     this._cards = [];

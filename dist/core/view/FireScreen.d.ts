@@ -1,14 +1,18 @@
-import { Container } from "pixi.js";
+import { Application, Container } from "pixi.js";
 import IRepository from "../model/repository/IRepository";
 import PixiTextureData from "../model/schema/texture/PixiTextureData";
 export default class FireScreen {
     private _repository;
-    private _flames;
+    private _app;
+    private _flame;
     private _container;
+    private _flameContainer;
     private _timeout;
-    constructor(_repository: IRepository<PixiTextureData>);
-    update(): void;
+    private _texture;
+    private _chemneyTexture;
+    constructor(_repository: IRepository<PixiTextureData>, _app: Application);
     getContainer(): Container;
     destroy(): void;
     reset(): void;
+    update(delta: any): void;
 }

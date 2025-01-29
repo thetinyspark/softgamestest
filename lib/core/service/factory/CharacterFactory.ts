@@ -8,6 +8,6 @@ export default class CharacterFactory implements IFactory{
     }
 
     fromData(obj:any):Character{
-        return new Character();
+        return new Character(this._uidService.createUID("characters"), obj.name, obj.position, obj.avatar);
     }
 }

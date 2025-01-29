@@ -1,11 +1,11 @@
 {
   "include": ["lib", "test"],
-  "exclude": ["lib/index.ts"],
+  "exclude": ["lib/index.ts","lib/core/view"],
   "compilerOptions": {
     "target": "esNext",
     "module": "commonjs",
     "declaration": true,
-    "outDir": "./dist",
+    "outDir": "./dist/spec",
     "strict": false,
     "typeRoots": [
       "node_modules/@types"

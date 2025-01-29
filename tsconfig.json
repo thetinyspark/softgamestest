@@ -3,17 +3,18 @@
     "lib"
   ],
   "compilerOptions": {
-    "target": "esNext",
     "module": "commonjs",
     "declaration": true,
     "outDir": "./dist",
     "strict": false,
+    "target": "es2015",
+    "lib": ["es2015", "dom"],
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "types": [
-      "@types/jasmine",
-      "@types/node"
     ],
   }
 }

@@ -1,0 +1,7 @@
+{
+  "textures": [
+    { "key": "fire", "url": "./assets/fire.png" },
+    { "key": "board", "url": "./assets/board.jpg" },
+    { "key": "texting", "url": "./assets/texting-background.jpg" }
+  ]
+}

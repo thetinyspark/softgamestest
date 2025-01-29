@@ -1,5 +1,15 @@
-import { Container } from "@thetinyspark/coffe-maker";
+import { Container, Facade } from "@thetinyspark/coffe-maker";
 import AppConst from "./core/ioc/app.const";
+import { Application } from "pixi.js";
+import { configFacade, configIOC } from "./core/ioc/config";
 
-const defaultContainer = new Container();
-console.log(defaultContainer);
+function start(){
+
+    const defaultContainer = new Container();
+    configIOC(defaultContainer);
+    const facade = configFacade(defaultContainer) as Facade; 
+    facade.sendNotification(AppConst.START_APP);
+    // document.body.appendChild(app.view as any);
+}
+
+window.addEventListener("load", start);

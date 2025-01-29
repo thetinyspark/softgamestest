@@ -9,6 +9,7 @@ import DialogScreen from "../DialogScreen";
 import CharacterAndDialogService from "../../service/CharacterAndDialogService";
 import FireScreen from "../FireScreen";
 import VerticalMenu from "../components/VerticalMenu";
+import FPSMeter from "../components/FPSMeter";
 
 export default class MainMediator extends Mediator{
     private _menu:VerticalMenu;
@@ -67,6 +68,13 @@ export default class MainMediator extends Mediator{
     
         // init resize listener
         window.addEventListener("resize", ()=>this._onResize());
+
+        // display fps
+        this.displayFPS();
+    }
+
+    private displayFPS(){
+        this._application.stage.addChild(new FPSMeter(this._application));
     }
 
     private _clearScreens(){

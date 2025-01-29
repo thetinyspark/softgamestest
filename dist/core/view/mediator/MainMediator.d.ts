@@ -7,6 +7,7 @@ export default class MainMediator extends Mediator {
     private _application;
     constructor();
     init(): void;
+    private displayFPS;
     private _clearScreens;
     private _onResize;
 }

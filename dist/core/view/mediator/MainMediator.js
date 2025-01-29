@@ -8,6 +8,7 @@ const DialogScreen_1 = require("../DialogScreen");
 const CharacterAndDialogService_1 = require("../../service/CharacterAndDialogService");
 const FireScreen_1 = require("../FireScreen");
 const VerticalMenu_1 = require("../components/VerticalMenu");
+const FPSMeter_1 = require("../components/FPSMeter");
 class MainMediator extends coffe_maker_1.Mediator {
     constructor() {
         super();
@@ -50,6 +51,11 @@ class MainMediator extends coffe_maker_1.Mediator {
         this._fireScreen = new FireScreen_1.default(repo, this._application);
         // init resize listener
         window.addEventListener("resize", () => this._onResize());
+        // display fps
+        this.displayFPS();
+    }
+    displayFPS() {
+        this._application.stage.addChild(new FPSMeter_1.default(this._application));
     }
     _clearScreens() {
         this._application.stage.removeChild(this._cardsScreen.getContainer());
